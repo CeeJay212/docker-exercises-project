@@ -1,0 +1,50 @@
+pipeline {
+  agent any
+  stages {
+    stage('checkout') {
+      steps {
+         // your git checkout step
+        git branch: 'main', url: 'https://github.com/CeeJay212/docker-exercises-project.git'
+      }
+    }
+
+    stage('test') {
+      steps {
+        // your gradle test step
+        sh 'gradle test'
+      }
+    }
+    stage('build') {
+      steps {
+        // your gradle test step
+        sh 'gradle build -x test'
+      }
+    }
+    stage('docker build') {
+      steps {
+        // your docker image build
+        sh 'docker build -t docker-exercises-my-app:latest .'
+      }
+    }
+    stage('docker login') {
+      steps {
+        // your docker login withCredentials
+        withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
+          sh ' echo $NEXUS_PASS | docker login -u $NEXUS_USER --password-stdin localhost:8082'
+        }
+      }
+    }
+    stage('docker image tag') {
+      steps {
+        // your docker image tag
+        sh 'docker tag docker-exercises-my-app:latest localhost:8082/docker-exercises-project:1.0'
+      }
+    }
+    stage('docker image push') {
+      steps {
+        // your docker image tag
+        sh 'docker push localhost:8082/docker-exercises-project:1.0'
+      }
+    }
+  }
+}
