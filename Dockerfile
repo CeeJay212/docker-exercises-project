@@ -3,7 +3,7 @@ WORKDIR /app
 COPY build.gradle settings.gradle ./
 RUN gradle build --no-daemon -x test || return 0
 COPY src ./src
-RUN gradle build --no-daemon -x test
+RUN gradle build --no-daemon
 
 FROM amazoncorretto:17-alpine-jdk
 WORKDIR /app

@@ -7,20 +7,7 @@ pipeline {
         git branch: 'main', url: 'https://github.com/CeeJay212/docker-exercises-project.git'
       }
     }
-
-    stage('test') {
-      steps {
-        // your gradle test step
-        sh './gradlew test'
-      }
-    }
-    stage('build') {
-      steps {
-        // your gradle test step
-        sh './gradlew build -x test'
-      }
-    }
-    stage('docker build') {
+    stage('test & docker build') {
       steps {
         // your docker image build
         sh 'docker build -t docker-exercises-my-app:latest .'
