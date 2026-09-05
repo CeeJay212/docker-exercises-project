@@ -24,13 +24,13 @@ pipeline {
     stage('docker image tag') {
       steps {
         // your docker image tag
-        sh 'docker tag docker-exercises-my-app:latest localhost:8082/docker-exercises-project:1.0'
+        sh 'docker tag docker-exercises-my-app:latest localhost:8082/docker-exercises-project:2.0'
       }
     }
     stage('docker image push') {
       steps {
         // your docker image tag
-        sh 'docker push localhost:8082/docker-exercises-project:1.0'
+        sh 'docker push localhost:8082/docker-exercises-project:2.0'
       }
     }
   }
