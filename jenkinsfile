@@ -10,7 +10,7 @@ pipeline {
     stage('bump version') {
       steps {
         script {
-          def content = readFile('gradle.build')
+          def content = readFile('build.gradle')
           def matcher = content =~ /version '(.+)'/
           def currentVersion = matcher[0][1]
 
