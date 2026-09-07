@@ -21,7 +21,7 @@ pipeline {
           def newVersion = "${major}.${minor}-SNAPSHOT"
 
           def updatedContent = content.replace("version '${currentVersion}'", "version '${newVersion}'")
-            writeFile(file: 'build.gradle', text: updatedContent)
+          writeFile(file: 'build.gradle', text: updatedContent)
 
           echo "current version: ${currentVersion}, new version: ${newVersion}"
         }
