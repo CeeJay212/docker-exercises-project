@@ -11,8 +11,7 @@ pipeline {
       steps {
         script {
           def content = readFile('build.gradle')
-          def matcher = (content =~ /(?m)^version '(.+)'/)[0][1]
-          def currentVersion = matcher[0][1]
+          def currentVersion = (content =~ /(?m)^version '(.+)'/)[0][1]
 
           def versionParts = currentVersion.split('-')
           def numberParts = versionParts[0].split('\\.')
