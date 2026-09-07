@@ -20,7 +20,7 @@ pipeline {
           def minor = numberParts[1].toInteger() + 1
           def newVersion = "${major}.${minor}-SNAPSHOT"
 
-          echo "Current version: ${currentVersion}", new Version: ${newVersion}"
+          echo "current version: ${currentVersion}, new version: ${newVersion}"
         }
       }
     }
