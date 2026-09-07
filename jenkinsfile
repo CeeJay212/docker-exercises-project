@@ -1,6 +1,23 @@
 pipeline {
   agent any
   stages {
+    stage {
+      steps {
+        script {
+        def content = readFile('gradle.build')
+        def matcher = content =~ /version '(.+)'/
+        def currentVersion = matcher[0][1]
+
+        def versionParts = currentVersion.split('-')
+        def numberParts = versionParts[0].split('\\.')
+        def major = numberParts[0]
+        def minor = numberParts[1].toInteger() + 1
+        def newVersion = "${major}.${minor}-SNAPSHOT"
+        }
+      }
+    }
+
+        echo "Current version: ${currentVersion}", new Version: ${newVersion}"
     stage('checkout') {
       steps {
          // your git checkout step
