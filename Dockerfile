@@ -4,7 +4,7 @@ COPY build.gradle settings.gradle ./
 RUN gradle build --no-daemon -x test || return 0
 COPY src ./src
 RUN gradle build --no-daemon
-RUN mv build/libs/docker-exercises-project-*.jar /app/build/libs/app.jar
+RUN mv build/libs/docker-exercises-project-*-SNAPSHOT.jar /app/build/libs/app.jar
 
 FROM amazoncorretto:17-alpine-jdk
 WORKDIR /app
